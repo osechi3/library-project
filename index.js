@@ -15,6 +15,7 @@ function addBookToLibrary(title, author, pages, isRead) {
     renderNew(userBook);
 }
 
+// Create a book entry in the table
 function renderNew(element) {
     const table = document.querySelector('table');
     const newRow = document.createElement('tr');
@@ -33,19 +34,16 @@ function renderNew(element) {
     isReadButton.classList.add('is-read-button');
     newRow.appendChild(isReadButton);
     isReadButton.addEventListener('click', () => {
-        isReadButton.previousElementSibling.setAttribute('id', 'is-read-cell');
-        // const isReadCell = document.querySelector('#is-read-cell');
         const isReadCell = isReadButton.previousElementSibling;
         if (myLibrary[itemIndex].isRead == 'No') {
             myLibrary[itemIndex].isRead = 'Yes';
             isReadCell.textContent = myLibrary[itemIndex].isRead;
         } else if (myLibrary[itemIndex].isRead == 'Yes') {
             myLibrary[itemIndex].isRead = 'No';
-            isReadCell.textContent = 'No';
+            isReadCell.textContent = myLibrary[itemIndex].isRead;
         }
-        // try to refactor addEventListener
     })
-    // Create a delete button
+    // Create a Delete button
     const deleteButton = document.createElement('button');
     deleteButton.setAttribute('type', 'button')
     deleteButton.classList.add('delete-button');
@@ -56,7 +54,6 @@ function renderNew(element) {
         delete myLibrary[itemIndex]; // instead of splice()
         // Otherwise the items' indexes shift causing an error
     })
-        // try to refactor -- function name(newRow)
 }
 
 function render() {
